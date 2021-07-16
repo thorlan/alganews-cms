@@ -11,7 +11,7 @@ export default function input({label, ...props} : InputProps){
         <I.Wrapper>
             {
                 label && 
-                <span>{label}</span>
+                <span className="Label">{label}:</span>
             }
             <input 
                 {...props} 
