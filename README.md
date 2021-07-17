@@ -6,3 +6,6 @@ rodando o sb: npm run storybook
 npm install styled-components && npm install -D @types/styled-components
 
 -npm i polished
+
+ICONES
+npm install @mdi/react @mdi/js
