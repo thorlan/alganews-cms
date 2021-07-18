@@ -9,3 +9,6 @@ npm install styled-components && npm install -D @types/styled-components
 
 ICONES
 npm install @mdi/react @mdi/js
+
+TABELA REACT TABLE
+npm install react-tables @types/react-table
