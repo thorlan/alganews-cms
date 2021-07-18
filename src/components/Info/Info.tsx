@@ -24,7 +24,7 @@ export default function Info({ title, description }: InfoProps) {
         </I.InfoIcon>
             <I.Messages>
                 <I.Title>{title}</I.Title>
-                <Paragraph>{description}</Paragraph>
+                <p>{description}</p>
             </I.Messages>
 
         </I.InnerContent>
