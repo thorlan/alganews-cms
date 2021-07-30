@@ -20,6 +20,21 @@ const THEME = {
         },
     },
 
+    removerImagem: {
+        bg: '#FFFFFF',
+        color: '#274060',
+        fontSize: '18px',
+        lineHeight: '21,6px',
+        padding: '16px',
+        onHover: `
+            box-shadow: 0 3px 6px rgba(0,0,.2);
+        `,
+        disabled: {
+            color: '#FFFF',
+            bg: transparentize(0.44, COLORS.primary)
+        },
+    },
+
 
     primary: {
         bg: '#0099FF',
@@ -47,12 +62,27 @@ const THEME = {
 }
 
 export const Wrapper = styled.button<{
-    variant: 'danger' | 'primary' | 'text'
+    variant: 'danger' | 'primary' | 'text' | 'removerImagem'
 }>`
-    padding: 6px 8px 4px;
+    
     border: 1px solid ${p=> THEME[p.variant].bg};
     color:${p => THEME[p.variant].color};
     background-color:${p => THEME[p.variant].bg};
+
+    font-size:${p => p.variant === "removerImagem" ? THEME[p.variant].fontSize : null};
+    line-height: ${p => p.variant === "removerImagem" ? THEME[p.variant].lineHeight : null};
+    padding: ${p => p.variant === "removerImagem" ? THEME[p.variant].padding : '6px 8px 4px'};
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: ${p => p.variant === "removerImagem" ? '"Lato", sans-serif' : null} ;
+    font-weight: ${p => p.variant === "removerImagem" ? '600' : null} ;
+
+    span{
+        padding-left: 12px;
+        margin-top: -1px;
+    }
 
     &:hover,
     &:focus {

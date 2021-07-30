@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import * as B from './Button.styles';
 
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-    variant: 'danger' | 'text' | 'primary'
+    variant: 'danger' | 'text' | 'primary' | 'removerImagem'
     label: string
 }
 
@@ -12,7 +12,7 @@ export default function Button({ variant, label,ref, ...props }: ButtonProps) {
             variant={variant}
             {...props}
         >
-            {label}
+            {label} {props.children && <span>{props.children}</span>}
         </B.Wrapper>
     )
 

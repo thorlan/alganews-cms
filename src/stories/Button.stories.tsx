@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
+import Icon from '@mdi/react';
+import { mdiDelete } from '@mdi/js';
 import Button, { ButtonProps } from '../components/Button/Button';
 
 export default {
@@ -11,6 +12,12 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+
+
+const removerIcon = <Icon
+    size={'24px'}
+    path={mdiDelete}
+/>
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -35,5 +42,13 @@ Disabled.args = {
   variant: 'text',
   disabled: true,
   label: 'resetar senha',
+};
+
+export const RemoverImagem = Template.bind({});
+RemoverImagem.args = {
+  variant: 'removerImagem',
+  disabled: false,
+  label: 'Remover imagem',
+  children: removerIcon
 };
 
