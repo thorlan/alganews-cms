@@ -2,6 +2,8 @@ criação do projeto: npx create-react-app nome --template typescript
 ativando story book: npx sb init
 rodando o sb: npm run storybook
 
+KEYCODE.INFO -> MOSTRA OS CODE DAS TECLAS
+
 --instalando styled components
     npm install styled-components && npm install -D @types/styled-components
 
@@ -18,3 +20,9 @@ npm i polished
     npm install --save react-chartjs-2
     downgrade do chart npm install chart.js@2.9.4 react-chartjs-2@2.11.1
     npm install @types/chart.js@2.9.32
+
+
+--react tag input
+    npm install react-tag-input
+    npm install -D @types/react-tag-input
+    npm install react-dnd react-dnd-html5-backend
