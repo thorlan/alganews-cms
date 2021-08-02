@@ -26,3 +26,7 @@ npm i polished
     npm install react-tag-input
     npm install -D @types/react-tag-input
     npm install react-dnd react-dnd-html5-backend
+
+--react markdown editor lite
+    npm install react-markdown-editor-lite --save
+    npm install markdown-it && npm install -D @types/markdown-it
