@@ -1,10 +1,10 @@
 import { mdiOpenInNew } from '@mdi/js';
 import Icon from '@mdi/react';
-import { Story, ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { useMemo } from 'react';
 import { Column, useTable } from 'react-table';
-
 import Table from '../components/Table/Table';
+
 
 export default {
     title: 'Example/Table',
@@ -12,7 +12,7 @@ export default {
     // argTypes: {
     //   backgroundColor: { control: 'color' },
     // },
-} as ComponentMeta<typeof Table>;
+} as Meta;
 
 type Post = {
     id: number
@@ -74,42 +74,43 @@ export function Default() {
         []
     );
 
-    const columns = useMemo<Column<Post>[]>(() => [
-        {
-            Header: '',
-            accessor: 'id', // accessor is the "key" in the data
-            Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09F'} />
-        },
-        {
-            Header: () => <div style={{textAlign: 'left'}}>Artigo</div>,
-            accessor: 'title',
-            width: 320,
-            Cell: (props) => <div style={{ textAlign: 'left', display:'flex', alignItems: 'center', gap:'8px' }}>
-                <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name} />
-                {props.value}
-            </div>
-        },
-        {
-            Header: () => <div style={{textAlign: 'right'}}>Views</div>,
-            accessor: 'views',
-            Cell: (props) => <div style={{ textAlign: 'right' , fontWeight: 700 , fontFamily: 'Roboto mono, monospace'}}>  {props.value.toLocaleString('pt-br')} </div>
-        },
-        {
-            Header: () => <div style={{textAlign: 'left'}}>Conversões</div>,
-            accessor: 'conversions',
-            Cell: (props) => <div style={{ display: 'flex', gap: '8px', fontWeight: 700 , fontFamily: '"Roboto mono", monospace'}}>
-                <span>{props.value.thousands}K</span>
-                <span style={{color: '#09F'}}>{props.value.percentage}%</span>
-            </div>
-        },
-        {
-            Header: () => <div style={{textAlign: 'right'}}>Ações</div>,
-            id: Math.random().toString(),
-            Cell: (props) => <div style={{ textAlign: 'right'}}>
-                todo: actions
-            </div>
-        },
-    ],
+    const columns = useMemo<Column<Post>[]>(
+        () => [
+            {
+                Header: '',
+                accessor: 'id', // accessor is the "key" in the data
+                Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09f'} />
+            },
+            {
+                Header: () => <div style={{ textAlign: 'left' }}>Artigo</div>,
+                accessor: 'title',
+                width: 320,
+                Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name} />
+                    {props.value}
+                </div>
+            },
+            {
+                Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
+                accessor: 'views',
+                Cell: (props) => <div style={{ textAlign: 'right', fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>{props.value.toLocaleString('pt-br')}</div>
+            },
+            {
+                Header: () => <div style={{ textAlign: 'left' }}>Conversões</div>,
+                accessor: 'conversions',
+                Cell: (props) => <div style={{ display: 'flex', gap: 8, fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>
+                    <span>{props.value.thousands}k</span>
+                    <span style={{ color: '#09f' }}>{props.value.percentage}%</span>
+                </div>
+            },
+            {
+                id: Math.random().toString(),
+                Header: () => <div style={{ textAlign: 'right' }}>Ações</div>,
+                Cell: () => <div style={{ textAlign: 'right' }}>
+                    todo: actions
+                </div>
+            },
+        ],
         []
     )
 
@@ -127,43 +128,44 @@ export function WithoutData() {
         []
     );
 
-    const columns = useMemo<Column<Post>[]>(() => [
-        {
+    const columns = useMemo<Column<Post>[]>(
+        () => [
+          {
             Header: '',
             accessor: 'id', // accessor is the "key" in the data
-            Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09F'} />
-        },
-        {
+            Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09f'} />
+          },
+          {
             Header: 'Artigo',
             accessor: 'title',
             width: 320,
-            Cell: (props) => <div style={{ textAlign: 'left', display:'flex', alignItems: 'center', gap:'8px' }}>
-                <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name} />
-                {props.value}
+            Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
+              <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name}/>
+              {props.value}
             </div>
-        },
-        {
+          },
+          {
             Header: 'Views',
             accessor: 'views',
-            Cell: (props) => <div style={{ textAlign: 'right' , fontWeight: 700 , fontFamily: 'Roboto mono, monospace'}}>  {props.value.toLocaleString('pt-br')} </div>
-        },
-        {
+            Cell: (props) => <div style={{ textAlign: 'right', fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>{props.value.toLocaleString('pt-br')}</div>
+          },
+          {
             Header: 'Conversões',
             accessor: 'conversions',
-            Cell: (props) => <div style={{ display: 'flex', gap: '8px', fontWeight: 700 , fontFamily: '"Roboto mono", monospace'}}>
-                <span>{props.value.thousands}K</span>
-                <span style={{color: '#09F'}}>{props.value.percentage}%</span>
+            Cell: (props) => <div style={{ display: 'flex', gap: 8, fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>
+              <span>{props.value.thousands}k</span>
+              <span style={{ color: '#09f' }}>{props.value.percentage}%</span>
             </div>
-        },
-        {
+          },
+          {
             Header: 'Ações',
-            Cell: (props) => <div style={{ textAlign: 'right'}}>
-                todo: actions
+            Cell: () => <div style={{ textAlign: 'right' }}>
+              todo: actions
             </div>
-        },
-    ],
+          },
+        ],
         []
-    )
+      )
 
     const instance = useTable<Post>({ data, columns });
 

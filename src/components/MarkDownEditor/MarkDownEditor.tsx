@@ -6,7 +6,7 @@ MdEditor.unuse(Plugins.FontUnderline)
 
 const parser = new MarkdownIt()
 
-export interface MarkdownEditorProps {
+export interface MarkDownEditorProps {
 
 }
 

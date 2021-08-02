@@ -7,7 +7,7 @@ export default {
     component: Profile,
 } as Meta<typeof Profile>;
 
-const Template: Story<typeof Profile> = (args) => <Profile {...args} />;
+const Template: Story<ProfileProps> = (args) => <Profile {...args} />;
 
 export const Default = Template.bind({})
 
