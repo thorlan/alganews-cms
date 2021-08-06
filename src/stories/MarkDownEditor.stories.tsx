@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import MarkDownEditor, { MarkDownEditorProps } from '../components/MarkDownEditor';
+import MarkDownEditor, { MarkDownEditorProps } from '../app/components/MarkDownEditor';
 
 export default {
     title: 'Example/MarkDownEditor',
