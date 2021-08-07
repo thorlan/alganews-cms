@@ -1,8 +1,8 @@
-import NavBar from '../../app/components/NavBar/NavBar'
+import NavBar from '../../components/NavBar/NavBar'
 import * as DL from './Default.layout.styles'
 
-import Logo from '../../app/components/Logo/Logo'
-import SessionController from '../../app/components/SessionController'
+import Logo from '../../components/Logo/Logo'
+import SessionController from '../../components/SessionController'
 
 interface DefaultLayoutProps {
     children: React.ReactNode
@@ -12,13 +12,15 @@ function DefaultLayout(props: DefaultLayoutProps) {
 
     return <DL.Wrapper>
         <DL.Header>
-            <Logo/>
+            <Logo />
         </DL.Header>
         <DL.Main>
             <DL.Navigation>
                 <NavBar />
             </DL.Navigation>
-            <DL.FeaturedContent>{props.children}</DL.FeaturedContent>
+            <DL.FeaturedContent>
+                {props.children}
+            </DL.FeaturedContent>
             <DL.Aside>
                 <SessionController
                     name="Thiago Orlandini"
