@@ -30,3 +30,15 @@ npm i polished
 --react markdown editor lite
     npm install react-markdown-editor-lite --save
     npm install markdown-it && npm install -D @types/markdown-it
+
+
+
+
+Observar a organização!!!
+app -> 
+ - components
+ - features (logica)
+ - views
+ - layout
+assets -> imgs
+core -> hooks e coisas globais

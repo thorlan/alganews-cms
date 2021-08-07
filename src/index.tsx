@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './core/imports.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import UserView from './app/views/Users.view';
 import NotFound404View from './app/views/NotFound404.view';
-import ContactView from './app/views/Contact.view';
+import EditorsListView from './app/views/EditorsList.view';
 import HomeView from './app/views/Home.view';
 import GlobalStyles from './core/globalStyles'
+import PostCreateView from './app/views/PostCreate.view';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
-        <Route path={'/'} exact component={HomeView} />
-        <Route path={'/contato'} exact component={ContactView} />
-        <Route path={'/usuario/:userId'} exact component={UserView} />
+        <Route path='/' exact component={HomeView} />
+        <Route path='/editores' exact component={EditorsListView} />
+        <Route path='/posts/criar' exact component={PostCreateView} />
         <Route component={NotFound404View} />
       </Switch>
     </BrowserRouter>
