@@ -23,7 +23,7 @@ function DefaultLayout(props: DefaultLayoutProps) {
             </DL.FeaturedContent>
             <DL.Aside>
                 <SessionController
-                    name="Thiago Orlandini Carvalho"
+                    name="Thiago Orlandini"
                     description="Tentando fazer isso funcionar"
                 />
             </DL.Aside>
