@@ -4,6 +4,8 @@ import * as DL from './Default.layout.styles'
 import Logo from '../../components/Logo/Logo'
 import SessionController from '../../components/SessionController'
 
+import confirm from '../../../core/utils/confirm';
+
 interface DefaultLayoutProps {
     children: React.ReactNode
 }
@@ -25,6 +27,13 @@ function DefaultLayout(props: DefaultLayoutProps) {
                 <SessionController
                     name="Thiago Orlandini Carvalho"
                     description="Tentando fazer isso funcionar"
+                    onLogout={() => {
+                        confirm({
+                            title: 'Você quer deslogar?',
+                            onConfirm: () => window.alert('confirmado'),
+                            onCancel: () => window.alert('cancelado'),
+                        })
+                    }}
                 />
             </DL.Aside>
         </DL.Main>

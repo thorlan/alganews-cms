@@ -1,3 +1,4 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -8,6 +9,7 @@ export const Wrapper = styled.div`
   background: #F3F8FA;
   width: 373px;
   color: #274060;
+  border: 1px solid ${transparentize(0.9, '#274060')};
 `
 
 export const InnerContent = styled.div`

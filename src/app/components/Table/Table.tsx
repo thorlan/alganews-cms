@@ -44,7 +44,7 @@ export default function Table<T extends object>({ instance }: { instance: TableI
                                         row.cells.map(cell => {
 
                                             return <T.BodyCell {...cell.getCellProps()}>
-                                                <th>{cell.render('Cell')}</th>
+                                                {cell.render('Cell')}
                                             </T.BodyCell>
                                         })
                                     }

@@ -2,6 +2,16 @@ criação do projeto: npx create-react-app nome --template typescript
 ativando story book: npx sb init
 rodando o sb: npm run storybook
 
+Observar a organização!!!
+app -> 
+ - components
+ - features (logica)
+ - views
+ - layout
+assets -> imgs
+core -> hooks e coisas globais
+
+
 KEYCODE.INFO -> MOSTRA OS CODE DAS TECLAS
 
 --instalando styled components
@@ -31,14 +41,5 @@ npm i polished
     npm install react-markdown-editor-lite --save
     npm install markdown-it && npm install -D @types/markdown-it
 
-
-
-
-Observar a organização!!!
-app -> 
- - components
- - features (logica)
- - views
- - layout
-assets -> imgs
-core -> hooks e coisas globais
+--react confirm alert
+    npm install react-confirm-alert

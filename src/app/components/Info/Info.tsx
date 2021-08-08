@@ -1,6 +1,5 @@
 import Icon from "@mdi/react";
 import { mdiInformation } from "@mdi/js";
-import Paragraph from '../Typography/Paragraph';
 import * as I from './Info.styles';
 
 
