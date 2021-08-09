@@ -9,7 +9,7 @@ interface ConfirmProps {
 }
 
 export default function confirm(props: ConfirmProps) {
-    return (
+    setTimeout(() => {
         confirmAlert({
             overlayClassName: 'confirm-overlay',
             customUI: ({ onClose }) => {
@@ -32,5 +32,5 @@ export default function confirm(props: ConfirmProps) {
                 );
             }
         })
-    )
+    }, 0)
 }

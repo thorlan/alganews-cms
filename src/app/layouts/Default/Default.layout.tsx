@@ -5,6 +5,7 @@ import Logo from '../../components/Logo/Logo'
 import SessionController from '../../components/SessionController'
 
 import confirm from '../../../core/utils/confirm';
+import info from '../../../core/utils/info';
 
 interface DefaultLayoutProps {
     children: React.ReactNode
@@ -30,7 +31,12 @@ function DefaultLayout(props: DefaultLayoutProps) {
                     onLogout={() => {
                         confirm({
                             title: 'Você quer deslogar?',
-                            onConfirm: () => window.alert('confirmado'),
+                            onConfirm: () => {
+                                info({
+                                    title: "Você foi deslogado",
+                                    description: 'redirecionando para a página de login'
+                                })
+                            },
                             onCancel: () => window.alert('cancelado'),
                         })
                     }}

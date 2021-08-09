@@ -31,6 +31,4 @@ const Item = styled.li`
             color: #09f
         }
     }
-    
-    
 `;

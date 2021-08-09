@@ -7,8 +7,9 @@ interface InfoProps {
     description: string;
 }
 
+//setTimeout?? MacroTask JS!
 export default function info(props: InfoProps) {
-    return (
+    setTimeout(() => {
         confirmAlert({
             overlayClassName: 'info-overlay',
             customUI: () => {
@@ -20,5 +21,5 @@ export default function info(props: InfoProps) {
                 );
             }
         })
-    )
+    }, 0)
 }
