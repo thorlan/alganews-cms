@@ -9,6 +9,21 @@ import HomeView from './app/views/Home.view';
 import GlobalStyles from './core/globalStyles'
 import PostCreateView from './app/views/PostCreate.view';
 import EditorProfileView from './app/views/EditorProfile.view';
+import http from './core/http';
+
+
+async function getDataFromApi(){
+  try{
+    const response = await http.get('/posts');
+    const posts = response.data;
+    console.log(posts);
+
+  } catch(error){
+    console.log('houve um erro:', error.message);
+  }
+}
+
+getDataFromApi();
 
 ReactDOM.render(
   <React.StrictMode>

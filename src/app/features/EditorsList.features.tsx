@@ -1,7 +1,10 @@
 import styled from "styled-components";
+//import { User } from "../../sdk/@types/User"
 import Profile from "../components/Profile";
 
 export default function EditorsList() {
+
+   // const editors: User.EditorSummary[] = [];
 
     return <EditorsListWrapper>
         <Profile
