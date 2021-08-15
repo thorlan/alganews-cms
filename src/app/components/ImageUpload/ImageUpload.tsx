@@ -3,6 +3,8 @@ import { mdiUpload, mdiDelete } from '@mdi/js';
 import * as IU from './ImageUpload.styles';
 import { ChangeEvent, useState } from 'react';
 import Button from '../Button/Button';
+import FileService from '../../../sdk/services/File.service';
+
 
 export interface ImageUploadProps {
     label: string
@@ -17,8 +19,10 @@ function ImageUpload({ label }: ImageUploadProps) {
         if (file) {
             const reader = new FileReader();
 
-            reader.addEventListener('load', e => {
+            reader.addEventListener('load', async e => {
                 setFilePreview(String(e.target?.result));
+                const imageUrl = await FileService.upload(file);
+                console.log(imageUrl);
             })
 
             reader.readAsDataURL(file);
@@ -51,4 +55,4 @@ function ImageUpload({ label }: ImageUploadProps) {
     </IU.Wrapper>
 }
 
-export default ImageUpload
+export default ImageUpload;

@@ -9,7 +9,7 @@ export default function EditorsList() {
 
         const posts = PostService.getAllPosts({
             size:20,
-            page:2,
+            page:0,
             sort:['id', 'desc']
         });
         console.log(posts);

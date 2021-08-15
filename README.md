@@ -43,3 +43,6 @@ npm i polished
 
 --react confirm alert
     npm install react-confirm-alert
+
+--uuidv4
+    npm install uuidv4
