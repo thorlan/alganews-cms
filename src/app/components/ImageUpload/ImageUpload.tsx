@@ -7,10 +7,11 @@ import FileService from '../../../sdk/services/File.service';
 
 
 export interface ImageUploadProps {
-    label: string
+    label: string;
+    onImageUpload: (imageUrl: string) => any;
 }
 
-function ImageUpload({ label }: ImageUploadProps) {
+function ImageUpload(props: ImageUploadProps) {
 
     const [filePreview, setFilePreview] = useState<string | null>(null)
 
@@ -22,7 +23,7 @@ function ImageUpload({ label }: ImageUploadProps) {
             reader.addEventListener('load', async e => {
                 setFilePreview(String(e.target?.result));
                 const imageUrl = await FileService.upload(file);
-                console.log(imageUrl);
+                props.onImageUpload(imageUrl);
             })
 
             reader.readAsDataURL(file);
@@ -49,7 +50,7 @@ function ImageUpload({ label }: ImageUploadProps) {
                 size={'24px'}
                 path={mdiUpload}
             />
-            {label}
+            {props.label}
             <IU.Input type="file" onChange={handleChange} />
         </IU.Label>
     </IU.Wrapper>
