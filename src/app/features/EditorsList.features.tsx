@@ -18,6 +18,7 @@ export default function EditorsList() {
         {
             editors.map(editor => {
                 return <Profile
+                    key={editor.id}
                     title={editor.name}
                     description={getEditorDescription(new Date(editor.createdAt))}
                     imgSource={editor.avatarUrls.small}

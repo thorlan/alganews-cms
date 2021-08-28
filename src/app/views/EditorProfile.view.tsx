@@ -5,7 +5,7 @@ import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 function EditorProfileView() {
     return <DefaultLayout>
         <ErrorBoundary>
-            <EditorProfile hidePersonalData={false} />
+            <EditorProfile hidePersonalData={true} />
         </ErrorBoundary>
     </DefaultLayout>
 }
