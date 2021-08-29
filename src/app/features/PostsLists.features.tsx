@@ -3,6 +3,7 @@ import Icon from "@mdi/react";
 import { format } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { Column, useTable } from "react-table";
+import withBoundary from "../../core/hoc/withBoundary";
 import { Post } from "../../sdk/@types";
 import PostService from "../../sdk/services/Post.service";
 import Table from "../components/Table/Table";
@@ -21,18 +22,27 @@ import Table from "../components/Table/Table";
 //     }
 // }
 
-export default function PostList() {
+function PostList() {
 
     const [posts, setPosts] = useState<Post.Paginated>();
+    const [error, setError] = useState<Error>();
 
     useEffect(() => {
-        PostService.getAllPosts({
-            page: 0,
-            size: 7,
-            showAll: true,
-            sort: ['createdAt', 'desc']
-        }).then(setPosts);
+        PostService
+            .getAllPosts({
+                page: 0,
+                size: 7,
+                showAll: true,
+                sort: ['createdAt', 'desc']
+            }).then(setPosts)
+            .catch(error => {
+                setError(new Error(error.message));
+            });
     }, [])
+
+    if(error){
+        throw error;
+    }
 
     const columns = useMemo<Column<Post.Summary>[]>(
         () => [
@@ -59,7 +69,7 @@ export default function PostList() {
                 accessor: 'createdAt',
                 Cell: (props) => <div
                     style={{ textAlign: 'right', fontFamily: '"Roboto mono", monospace' }}>
-                    { format(new Date(props.value),'dd/MM/yyyy')}
+                    {format(new Date(props.value), 'dd/MM/yyyy')}
                 </div>
             },
             {
@@ -67,7 +77,7 @@ export default function PostList() {
                 accessor: 'updatedAt',
                 Cell: (props) => <div
                     style={{ textAlign: 'right', fontFamily: '"Roboto mono", monospace' }}>
-                    { format(new Date(props.value),'dd/MM/yyyy')}
+                    {format(new Date(props.value), 'dd/MM/yyyy')}
                 </div>
             },
             {
@@ -89,3 +99,6 @@ export default function PostList() {
     return <Table instance={instance} />
 
 }
+
+
+export default withBoundary(PostList, 'a lista de posts');

@@ -1,22 +1,36 @@
 import { useEffect, useState } from "react";
+import withBoundary from "../../core/hoc/withBoundary";
 import TransformEditorMonthlyEarningsIntoChartJs from "../../core/utils/TransformEditorMonthlyEarningsIntoChartJs";
 import MetricService from "../../sdk/services/Metric.service";
 import Chart, { ChartProps } from "../components/Chart/Chart";
 
-export default function UserPerformance() {
+function UserPerformance() {
 
-    const [data, setData] = useState<ChartProps['data']>();
+    const [editorEarnings, setEditorEarnings] = useState<ChartProps['data']>();
+    const [error, setError] = useState<Error>();
 
     useEffect(() => {
-        MetricService.getEditorMonthlyEarnings().then(TransformEditorMonthlyEarningsIntoChartJs).then(setData);
+        MetricService
+            .getEditorMonthlyEarnings()
+            .then(TransformEditorMonthlyEarningsIntoChartJs)
+            .then(setEditorEarnings)
+            .catch(error => {
+                setError(new Error(error.message));
+            });
     }, [])
 
-    if(!data){
+    if(error){
+        throw error;
+    }
+
+    if(!editorEarnings){
         return null;
     }
 
     return <Chart
         title={'Média de performance nos últimos 12 meses'}
-        data={data}
+        data={editorEarnings}
     />
 }
+
+export default withBoundary(UserPerformance, 'perfomance')
