@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import { User } from "../../sdk/@types";
 import UserService from "../../sdk/services/User.service";
@@ -12,6 +13,14 @@ export default function EditorsList() {
     useEffect(() => {
         UserService.getAllEditors().then(setEditors);
     }, []) //código só executa na inicialização do componente!
+
+    if(!editors.length){
+        return <EditorsListWrapper>
+            <Skeleton width={328} height={82}/>
+            <Skeleton width={328} height={82}/>
+            <Skeleton width={328} height={82}/>
+        </EditorsListWrapper>
+    }
 
     return <EditorsListWrapper>
 

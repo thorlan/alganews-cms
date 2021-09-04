@@ -49,3 +49,8 @@ npm i polished
 
 --date-fns
     npm install date-fns
+
+--loading skeleton
+    npm install react-loading-skeleton
+
+--https://loading.io/css

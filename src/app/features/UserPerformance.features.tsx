@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import withBoundary from "../../core/hoc/withBoundary";
 import TransformEditorMonthlyEarningsIntoChartJs from "../../core/utils/TransformEditorMonthlyEarningsIntoChartJs";
 import MetricService from "../../sdk/services/Metric.service";
@@ -24,7 +25,7 @@ function UserPerformance() {
     }
 
     if(!editorEarnings){
-        return null;
+        return <Skeleton height={227}/>;
     }
 
     return <Chart

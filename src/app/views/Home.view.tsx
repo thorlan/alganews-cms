@@ -5,7 +5,6 @@ import PostList from "../features/PostsLists.features";
 import UserPerformance from "../features/UserPerformance.features";
 import UserTopTags from "../features/UserTopTags.features";
 import UserEarnings from "../features/UserEarnings.features";
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 export default function HomeView() {
 

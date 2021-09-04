@@ -11,6 +11,7 @@ import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown";
 import React from "react";
 import info from "../../core/utils/info";
 import PostService from "../../sdk/services/Post.service";
+import Loading from "../components/Loading/Index";
 
 export default function PostForm() {
 
@@ -19,26 +20,40 @@ export default function PostForm() {
     const [title, setTitle] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
 
+    const [publishing, setPublishing] = useState<boolean>(false);
+
     async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-        
+
         e.preventDefault();
 
-        const newPost = {
-            body,
-            title,
-            tags: tags.map(tag => tag.text),
-            imageUrl,
+        try {
+            setPublishing(true);
+
+            const newPost = {
+                body,
+                title,
+                tags: tags.map(tag => tag.text),
+                imageUrl,
+            }
+
+            const insertedPost = await PostService.insertNewPost(newPost);
+
+            info({
+                title: 'Post salvo com sucesso',
+                description: 'Você acabou de criar o post com o id ' + insertedPost.id
+            })
+
+        } finally {
+            setPublishing(false);
         }
 
-        const insertedPost = await PostService.insertNewPost(newPost);
-
-        info({
-            title: 'Post salvo com sucesso',
-            description: 'Você acabou de criar o post com o id ' + insertedPost.id
-        })
     }
 
+
     return <PostFormWrapper onSubmit={handleFormSubmit}>
+
+        <Loading show={publishing} />
+
         <Input
             label="título"
             value={title}
