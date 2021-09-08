@@ -54,3 +54,5 @@ npm i polished
     npm install react-loading-skeleton
 
 --https://loading.io/css
+
+--react-paginate
