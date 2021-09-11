@@ -5,10 +5,13 @@ import { useEffect, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Column, usePagination, useTable } from "react-table";
 import withBoundary from "../../core/hoc/withBoundary";
+import modal from "../../core/utils/modal";
 import { Post } from "../../sdk/@types";
 import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading/Loading";
+import PostPreview from "./PostPreview.features";
 import Table from "../components/Table/Table";
+import PostTitleAnchor from "../components/PostTitleAnchor";
 
 function PostList() {
 
@@ -50,13 +53,32 @@ function PostList() {
                 Header: () => <div style={{ textAlign: 'left' }}>Título</div>,
                 accessor: 'title',
                 width: 320,
-                Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
+                Cell: (props) => <div style={{
+                    textAlign: 'left',
+                    display: 'flex',
+                    gap: 8,
+                    alignItems: 'center',
+                    maxWidth: 270
+                }}>
                     <img width={24} height={24}
                         src={props.row.original.editor.avatarUrls.small}
                         alt={props.row.original.editor.name}
                         title={props.row.original.editor.name}
                     />
-                    {props.value}
+                    <PostTitleAnchor
+                        title={props.value}
+                        href={`/posts/${props.row.original.id}`}
+                        onClick={e => {
+                            e.preventDefault();
+                            modal({
+                                children: <PostPreview
+                                    postId={props.row.original.id}
+                                />
+                            })
+                        }}
+                    >
+                        {props.value}
+                    </PostTitleAnchor>
                 </div>
             },
             {
