@@ -23,9 +23,6 @@ export default function Table<T extends object>({ instance, onPaginate }: TableP
         prepareRow,
         headerGroups,
         rows,
-        canPreviousPage,
-        canNextPage,
-        pageOptions,
         pageCount,
         gotoPage,
         state: {

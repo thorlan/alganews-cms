@@ -18,6 +18,14 @@ class PostService extends Service {
     static getExistingPost(postId: number){
         return this.Http.get<Post.Detailed>(`/posts/${postId}`).then(this.getData);
     }
+
+    static publishExistingPost(postId: number){
+        return this.Http.put<{}>(`/posts/${postId}/publishing`).then(this.getData);
+    }
+
+    static updateExistingPost(postId: number, post: Post.Input){
+        return this.Http.put<Post.Detailed>(`/posts/${postId}`, post).then(this.getData);
+    }
     
 }
 

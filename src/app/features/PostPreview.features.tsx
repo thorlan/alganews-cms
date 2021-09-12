@@ -6,6 +6,9 @@ import PostService from "../../sdk/services/Post.service";
 import Button from "../components/Button/Button"
 import Loading from "../components/Loading/Loading";
 import MarkdownEditor from "../components/MarkDownEditor"
+import confirm from "../../core/utils/confirm"
+import info from "../../core/utils/info";
+import modal from "../../core/utils/modal";
 
 interface PostPreviewProps {
   postId: number
@@ -15,6 +18,20 @@ function PostPreview(props: PostPreviewProps) {
 
   const [post, setPost] = useState<Post.Detailed>();
   const [loading, setLoading] = useState(false);
+
+  async function publishPost(){
+    await PostService.publishExistingPost(props.postId);
+    info({
+      title: 'Post publicado.',
+      description: 'O post foi publicado com sucesso.'
+    })
+  }
+
+  function reopenModal(){
+    modal({
+      children: <PostPreview postId={props.postId}/>
+    })
+  }
 
   useEffect(() => {
 
@@ -40,14 +57,25 @@ function PostPreview(props: PostPreviewProps) {
       <PostPreviewTitle>
         {post.title}
       </PostPreviewTitle>
+     
       <PostPreviewActions>
         <Button
           variant={'danger'}
           label={'Publicar'}
+          disabled={post.published}
+          onClick={()=> {
+            confirm({
+              title: 'Publicar o post?',
+              onConfirm: publishPost,
+              onCancel: reopenModal,
+            })
+          }}
         />
         <Button
           variant={'primary'}
           label={'Editar'}
+          disabled={post.published}
+          onClick={() => window.location.pathname =`/posts/editar/${props.postId}`}
         />
       </PostPreviewActions>
     </PostPreviewHeading>

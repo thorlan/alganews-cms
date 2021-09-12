@@ -94,5 +94,6 @@ export const Wrapper = styled.button<{
         color: ${p => THEME[p.variant].disabled.color};
         pointer-events: none;
         border-color: transparent;
+        opacity: 0.5;
     }
 `;
