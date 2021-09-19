@@ -6,12 +6,11 @@ import Skeleton from "react-loading-skeleton";
 import { Column, usePagination, useTable } from "react-table";
 import withBoundary from "../../core/hoc/withBoundary";
 import modal from "../../core/utils/modal";
-import { Post } from "../../sdk/@types";
-import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading/Loading";
 import PostPreview from "./PostPreview.features";
 import Table from "../components/Table/Table";
 import PostTitleAnchor from "../components/PostTitleAnchor";
+import { Post, PostService } from "orlandini-sdk";
 
 function PostList() {
 

@@ -1,5 +1,5 @@
 import { ChartProps } from "../../app/components/Chart/Chart";
-import { Metric } from "../../sdk/@types";
+import { Metric } from "orlandini-sdk";
 import { format } from 'date-fns'
 import {ptBR} from 'date-fns/locale'
 

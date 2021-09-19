@@ -11,8 +11,7 @@ import PostEditView from "./views/PostEdit.view";
 export default function App (){
 
   useEffect(() => {
-
-    //captura os erros de promises
+   
     window.onunhandledrejection = function (error: PromiseRejectionEvent) {
 
       info({

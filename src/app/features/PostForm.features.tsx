@@ -10,9 +10,9 @@ import TagInput from "../components/TagInput";
 import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown";
 import React from "react";
 import info from "../../core/utils/info";
-import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading/Index";
 import { useHistory } from "react-router";
+import { PostService } from "orlandini-sdk";
 
 
 interface PostFormProps {

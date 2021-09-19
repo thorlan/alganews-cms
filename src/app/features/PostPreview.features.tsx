@@ -1,14 +1,13 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import withBoundary from "../../core/hoc/withBoundary"
-import { Post } from "../../sdk/@types";
-import PostService from "../../sdk/services/Post.service";
 import Button from "../components/Button/Button"
 import Loading from "../components/Loading/Loading";
 import MarkdownEditor from "../components/MarkDownEditor"
 import confirm from "../../core/utils/confirm"
 import info from "../../core/utils/info";
 import modal from "../../core/utils/modal";
+import { Post, PostService } from "orlandini-sdk";
 
 interface PostPreviewProps {
   postId: number
