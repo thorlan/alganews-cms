@@ -56,3 +56,6 @@ npm i polished
 --https://loading.io/css
 
 --react-paginate
+
+--redux
+    npm install redux react-redux @reduxjs/toolkit 

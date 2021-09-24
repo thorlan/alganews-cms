@@ -5,10 +5,14 @@ import GlobalStyles from './core/globalStyles';
 import './core/imports.css';
 import reportWebVitals from './reportWebVitals';
 
+import {Provider} from 'react-redux'
+import store from './core/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <Provider store={store}>
+      <App/>
+    </Provider>
     <GlobalStyles />
   </React.StrictMode>,
   document.getElementById('root')
