@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice, isFulfilled, isPending, isRejected, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createReducer, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
 import { Post, PostService } from "orlandini-sdk";
 
 interface PostSliceState {
     paginated?: Post.Paginated,
     fetching: boolean;
+    counter: number;
 }
 
 const initialState: PostSliceState = {
@@ -14,7 +15,8 @@ const initialState: PostSliceState = {
         totalPages: 1,
         content: []
     },
-    fetching: false
+    fetching: false,
+    counter: 0
 };
 
 export const fetchPosts = createAsyncThunk(
@@ -23,29 +25,22 @@ export const fetchPosts = createAsyncThunk(
         const posts = await PostService.getAllPosts(query);
         return posts;
     }
-)
+);
 
-const postSlice = createSlice({
-    name: 'post',
-    initialState,
-    reducers: {
-        addPost(state, action: PayloadAction<Post.Summary>) {
-            state.paginated?.content?.push(action.payload)
-        },
-    },
+export const increment = createAction('post/increment');
 
-    extraReducers(builder){
-        builder.addCase(fetchPosts.fulfilled, (state, action) => {
-            state.paginated = action.payload;
-        }).addMatcher(isPending, (state) => {
-            state.fetching = true;
-        }).addMatcher(isFulfilled, (state) => {
-            state.fetching = false;
-        }).addMatcher(isRejected, (state) => {
-            state.fetching = false;
-        })
-    }
+export const postReducer = createReducer(initialState, (builder) => {
+    builder
+    .addCase(increment,(state) => {
+        state.counter++;
+    }).addCase(fetchPosts.fulfilled, (state, action) => {
+        state.paginated = action.payload;
+    }).addMatcher(isPending, (state) => {
+        state.fetching = true;
+    }).addMatcher(isFulfilled, (state) => {
+        state.fetching = false;
+    }).addMatcher(isRejected, (state) => {
+        state.fetching = false;
+    })
 });
 
-export const postReducer = postSlice.reducer;
-export const { addPost } = postSlice.actions;
