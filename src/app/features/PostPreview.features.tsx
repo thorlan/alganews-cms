@@ -1,93 +1,71 @@
-import styled from "@emotion/styled"
-import { useEffect, useState } from "react";
-import withBoundary from "../../core/hoc/withBoundary"
-import Button from "../components/Button/Button"
-import Loading from "../components/Loading/Loading";
-import MarkdownEditor from "../components/MarkDownEditor"
-import confirm from "../../core/utils/confirm"
-import info from "../../core/utils/info";
+import { useEffect } from "react";
+import styled from "styled-components";
+import withBoundary from "../../core/hoc/withBoundary";
+import Button from "../components/Button/Button";
+import confirm from "../../core/utils/confirm";
 import modal from "../../core/utils/modal";
-import { Post, PostService } from "orlandini-sdk";
+import useSinglePost from "../../core/hooks/useSinglePost";
+import Loading from "../components/Loading/Loading";
+import MarkdownEditor from "../components/MarkDownEditor";
 
 interface PostPreviewProps {
-  postId: number
+  postId: number;
 }
 
 function PostPreview(props: PostPreviewProps) {
+  const { fetchPosts, loading, post, publishPost } = useSinglePost();
 
-  const [post, setPost] = useState<Post.Detailed>();
-  const [loading, setLoading] = useState(false);
+  function publish() {
+    return publishPost(props.postId)
+  } 
 
-  async function publishPost(){
-    await PostService.publishExistingPost(props.postId);
-    info({
-      title: 'Post publicado.',
-      description: 'O post foi publicado com sucesso.'
-    })
-  }
-
-  function reopenModal(){
+  function reopenModal() {
     modal({
-      children: <PostPreview postId={props.postId}/>
-    })
+      children: <PostPreview postId={props.postId} />,
+    });
   }
 
   useEffect(() => {
+    fetchPosts(props.postId);
+  }, [fetchPosts, props.postId]);
 
-    setLoading(true);
+  if (loading) return <Loading show />;
 
-    PostService
-      .getExistingPost(props.postId)
-      .then(setPost)
-      .finally(() => setLoading(false));
+  if (!post) return null;
 
-  }, [props.postId])
-
-  if(loading){
-    return <Loading show/>
-  }
-
-  if(!post){
-    return null;
-  }
-
-  return <PostPreviewWrapper>
-    <PostPreviewHeading>
-      <PostPreviewTitle>
-        {post.title}
-      </PostPreviewTitle>
-     
-      <PostPreviewActions>
-        <Button
-          variant={'danger'}
-          label={'Publicar'}
-          disabled={post.published}
-          onClick={()=> {
-            confirm({
-              title: 'Publicar o post?',
-              onConfirm: publishPost,
-              onCancel: reopenModal,
-            })
-          }}
-        />
-        <Button
-          variant={'primary'}
-          label={'Editar'}
-          disabled={post.published}
-          onClick={() => window.location.pathname =`/posts/editar/${props.postId}`}
-        />
-      </PostPreviewActions>
-    </PostPreviewHeading>
-    <PostPreviewImage
-      src={post.imageUrls.medium}
-    />
-    <PostPreviewContent>
-      <MarkdownEditor
-        readOnly
-        value={post.body}
-      />
-    </PostPreviewContent>
-  </PostPreviewWrapper>
+  return (
+    <PostPreviewWrapper>
+      <PostPreviewHeading>
+        <PostPreviewTitle>{post.title}</PostPreviewTitle>
+        <PostPreviewActions>
+          <Button
+            variant={"danger"}
+            label={"Publicar"}
+            disabled={post.published}
+            onClick={() => {
+              confirm({
+                title: "Publicar o post?",
+                onConfirm: publish,
+                onCancel: reopenModal,
+              });
+            }}
+          />
+          <Button
+            variant={"primary"}
+            label={"Editar"}
+            disabled={post.published}
+            onClick={() =>
+              (window.location.pathname = `/posts/editar/${props.postId}`)
+            }
+          />
+        </PostPreviewActions>
+      </PostPreviewHeading>
+      <PostPreviewImage src={post.imageUrls.medium} />
+      <PostPreviewContent>
+        <MarkdownEditor readOnly value={post.body} />
+      </PostPreviewContent>
+    </PostPreviewWrapper>
+  );
 }
 
 

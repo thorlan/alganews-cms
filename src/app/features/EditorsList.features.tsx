@@ -1,18 +1,19 @@
-import { getEditorDescription, User, UserService } from "orlandini-sdk";
-import { useEffect, useState } from "react";
+import { getEditorDescription } from "orlandini-sdk";
+import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
+import useEditors from "../../core/hooks/userEditors";
 import Profile from "../components/Profile";
 
 export default function EditorsList() {
 
-    const [editors, setEditors] = useState<User.EditorSummary[]>([]);
+    const {editorsList, loading, fetchAllEditors} = useEditors();
 
     useEffect(() => {
-        UserService.getAllEditors().then(setEditors);
-    }, []) //código só executa na inicialização do componente!
+        fetchAllEditors();
+    }, [fetchAllEditors]) //código só executa na inicialização do componente!
 
-    if(!editors.length){
+    if(!editorsList.length){
         return <EditorsListWrapper>
             <Skeleton width={328} height={82}/>
             <Skeleton width={328} height={82}/>
@@ -22,8 +23,7 @@ export default function EditorsList() {
 
     return <EditorsListWrapper>
 
-        {
-            editors.map(editor => {
+        {editorsList.map(editor => {
                 return <Profile
                     key={editor.id}
                     title={editor.name}
@@ -31,7 +31,10 @@ export default function EditorsList() {
                     imgSource={editor.avatarUrls.small}
                     editorId={editor.id}
                 />
-            })
+        })}
+
+        {
+            loading ? 'Buscando mais informações' : null
         }
 
     </EditorsListWrapper>

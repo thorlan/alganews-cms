@@ -1,24 +1,16 @@
-import { MetricService } from "orlandini-sdk";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import withBoundary from "../../core/hoc/withBoundary";
-import TransformEditorMonthlyEarningsIntoChartJs from "../../core/utils/TransformEditorMonthlyEarningsIntoChartJs";
-import Chart, { ChartProps } from "../components/Chart/Chart";
+import usePerfomance from "../../core/hooks/usePerfomance";
+import Chart from "../components/Chart/Chart";
 
 function UserPerformance() {
 
-    const [editorEarnings, setEditorEarnings] = useState<ChartProps['data']>();
-    const [error, setError] = useState<Error>();
+    const { fetchEditorMonthlyEarnings, editorEarnings, error} = usePerfomance();
 
     useEffect(() => {
-        MetricService
-            .getEditorMonthlyEarnings()
-            .then(TransformEditorMonthlyEarningsIntoChartJs)
-            .then(setEditorEarnings)
-            .catch(error => {
-                setError(new Error(error.message));
-            });
-    }, [])
+        fetchEditorMonthlyEarnings();
+    }, [fetchEditorMonthlyEarnings])
 
     if(error){
         throw error;

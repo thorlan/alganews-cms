@@ -1,8 +1,9 @@
-import { getEditorDescription, UserService, User} from "orlandini-sdk";
+import { getEditorDescription} from "orlandini-sdk";
 import { transparentize } from "polished";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import useSingleEditor from "../../core/hooks/useSingleEditor";
 import FieldDescriptor from "../components/FieldDescriptor/FieldDescriptor";
 import ProgressBar from "../components/ProgressBar/ProgressBar";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
@@ -14,11 +15,12 @@ interface EditorProfileProps {
 function EditorProfile(props: EditorProfileProps) {
 
   const params = useParams<{ id: string }>();
-  const [editor, setEditor] = useState<User.EditorDetailed>();
+
+  const { editor, fetchEditor } = useSingleEditor();
 
   useEffect(() => {
-    UserService.getExistingEditor(Number(params.id)).then(editor => setEditor(editor))
-  }, [params.id])
+    fetchEditor(Number(params.id));
+  }, [fetchEditor, params.id])
 
   if (!editor) {
     return null;

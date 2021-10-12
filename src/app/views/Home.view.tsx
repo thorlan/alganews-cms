@@ -6,6 +6,7 @@ import UserPerformance from "../features/UserPerformance.features";
 import UserTopTags from "../features/UserTopTags.features";
 import UserEarnings from "../features/UserEarnings.features";
 import usePosts from "../../core/hooks/usePosts";
+import { useEffect } from "react";
 
 export default function HomeView() {
 
@@ -13,12 +14,11 @@ export default function HomeView() {
 
   const { paginatedPosts, loading, fetchPosts } = usePosts();
 
-  return <DefaultLayout>
+  useEffect(() => {
+    fetchPosts({ page: 1 });
+  },[fetchPosts])
 
-    <button onClick={() => fetchPosts({ page: 1 })}>
-      disparar
-    </button>
-    {loading ? 'carregando' : 'finalizado'}
+  return <DefaultLayout>
 
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: 32 }}>
       <UserTopTags />

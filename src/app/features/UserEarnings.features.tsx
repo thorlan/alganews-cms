@@ -1,16 +1,17 @@
-import { User, UserService } from "orlandini-sdk";
-import { useEffect, useState } from "react";
+import { User } from "orlandini-sdk";
+import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
+import useEarnings from "../../core/hooks/useEarnings";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 
 export default function UserEarnings(){
 
-    const [user, setUser] = useState<User.Detailed>();
+    const { user, fetchDetailedUser } = useEarnings();
 
     useEffect(() => {
-        UserService.getDetailedUser(7).then(setUser);
-    }, [])
+        fetchDetailedUser();
+    }, [fetchDetailedUser])
 
     if (!user){
         return <UserEarningsWrapper style={{ height: 123}}>
