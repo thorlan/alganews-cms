@@ -3,7 +3,7 @@ import { mdiUpload, mdiDelete } from '@mdi/js';
 import * as IU from './ImageUpload.styles';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Button from '../Button/Button';
-import { FileService } from 'orlandini-sdk';
+import { FileService } from 'danielbonifacio-sdk';
 import Loading from '../Loading/Index';
 
 

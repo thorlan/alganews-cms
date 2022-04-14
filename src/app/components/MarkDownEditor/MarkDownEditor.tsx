@@ -1,5 +1,5 @@
 import MarkdownIt from 'markdown-it'
-import { FileService } from 'orlandini-sdk';
+import { FileService } from 'danielbonifacio-sdk';
 import MdEditor, { Plugins } from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css';
 
@@ -8,7 +8,7 @@ MdEditor.unuse(Plugins.FontUnderline)
 const parser = new MarkdownIt()
 
 const defaultRender = parser.renderer.rules.link_open ||
-  function(tokens: any, idx: any, options: any, env: any, self: any) {
+  function (tokens: any, idx: any, options: any, env: any, self: any) {
     return self.renderToken(tokens, idx, options);
   };
 
@@ -31,7 +31,7 @@ export interface MarkDownEditorProps {
 
 export default function MarkdownEditor(props: MarkDownEditorProps) {
 
-  async function handleImageUpload(file: File){
+  async function handleImageUpload(file: File) {
     const fileUrl = await FileService.upload(file);
     return fileUrl;
 
@@ -44,8 +44,8 @@ export default function MarkdownEditor(props: MarkDownEditorProps) {
     style={{ height: props.readOnly ? 'auto' : 300 }}
     renderHTML={text => parser.render(text)}
     config={{
-      view:{
-        html:false
+      view: {
+        html: false
       }
     }}
     onChange={({ text }) => props.onChange && props.onChange(text)}

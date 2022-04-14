@@ -1,4 +1,4 @@
-import { getEditorDescription} from "orlandini-sdk";
+import { getEditorDescription } from "danielbonifacio-sdk";
 import { transparentize } from "polished";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";

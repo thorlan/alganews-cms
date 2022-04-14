@@ -1,6 +1,6 @@
 import { createAsyncThunk, createReducer, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
 import { stat } from "fs";
-import { User, UserService } from "orlandini-sdk";
+import { User, UserService } from "danielbonifacio-sdk";
 
 export const fetchAllEditors = createAsyncThunk('editor/fetchAllEditors',
     async function () {
@@ -29,7 +29,7 @@ export const editorReducer = createReducer(initialState, (builder) => {
         state.editorsList = action.payload;
     })
         .addMatcher(pending, (state) => {
-            state.fetching = true; 
+            state.fetching = true;
         })
         .addMatcher(rejected, (state) => {
             state.fetching = false;

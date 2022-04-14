@@ -1,7 +1,7 @@
 import { ChartProps } from "../../app/components/Chart/Chart";
-import { Metric } from "orlandini-sdk";
+import { Metric } from "danielbonifacio-sdk";
 import { format } from 'date-fns'
-import {ptBR} from 'date-fns/locale'
+import { ptBR } from 'date-fns/locale'
 
 function TransformEditorMonthlyEarningsIntoChartJs(editorEarning: Metric.EditorMonthlyEarnings): ChartProps['data'] {
 
@@ -10,7 +10,7 @@ function TransformEditorMonthlyEarningsIntoChartJs(editorEarning: Metric.EditorM
     const data2: number[] = [];
 
     editorEarning.forEach(earning => {
-        const formatedMonth = format(new Date(earning.yearMonth), 'MMMM', { locale: ptBR } );
+        const formatedMonth = format(new Date(earning.yearMonth), 'MMMM', { locale: ptBR });
         labels.push(formatedMonth);
         data1.push(earning.totalAmount);
         data2.push(earning.totalPlatformAverageAmount);
@@ -26,7 +26,7 @@ function TransformEditorMonthlyEarningsIntoChartJs(editorEarning: Metric.EditorM
                 backgroundColor: '#0099FF',
                 borderColor: '#0099FF',
                 borderWidth: 0.5,
-               // yAxisID: 'cashflow',
+                // yAxisID: 'cashflow',
             },
             {
                 label: 'Performance média do time',
@@ -35,7 +35,7 @@ function TransformEditorMonthlyEarningsIntoChartJs(editorEarning: Metric.EditorM
                 backgroundColor: '#274060',
                 borderColor: '#274060',
                 borderWidth: 0.5,
-               // yAxisID: 'cashflow',
+                // yAxisID: 'cashflow',
             }
         ]
     }

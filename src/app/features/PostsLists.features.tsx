@@ -10,12 +10,12 @@ import Loading from "../components/Loading/Loading";
 import PostPreview from "./PostPreview.features";
 import Table from "../components/Table/Table";
 import PostTitleAnchor from "../components/PostTitleAnchor";
-import { Post } from "orlandini-sdk";
+import { Post } from "danielbonifacio-sdk";
 import usePosts from "../../core/hooks/usePosts";
 
 function PostList() {
 
-    const {loading, paginatedPosts, fetchPosts } = usePosts();
+    const { loading, paginatedPosts, fetchPosts } = usePosts();
     const [page, setPage] = useState(0);
 
     useEffect(() => {

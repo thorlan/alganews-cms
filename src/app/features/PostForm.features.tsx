@@ -12,7 +12,7 @@ import React from "react";
 import info from "../../core/utils/info";
 import Loading from "../components/Loading/Index";
 import { useHistory } from "react-router";
-import { PostService } from "orlandini-sdk";
+import { PostService } from "danielbonifacio-sdk";
 
 
 interface PostFormProps {

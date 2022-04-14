@@ -5,13 +5,18 @@ import GlobalStyles from './core/globalStyles';
 import './core/imports.css';
 import reportWebVitals from './reportWebVitals';
 
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import store from './core/store';
+
+import "./auth/httpConfig";
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
     <GlobalStyles />
   </React.StrictMode>,

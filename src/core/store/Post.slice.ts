@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk, createReducer, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
-import { Post, PostService } from "orlandini-sdk";
+import { Post, PostService } from "danielbonifacio-sdk";
 
 interface PostSliceState {
     paginated?: Post.Paginated,
@@ -31,16 +31,16 @@ export const increment = createAction('post/increment');
 
 export const postReducer = createReducer(initialState, (builder) => {
     builder
-    .addCase(increment,(state) => {
-        state.counter++;
-    }).addCase(fetchPosts.fulfilled, (state, action) => {
-        state.paginated = action.payload;
-    }).addMatcher(isPending, (state) => {
-        state.fetching = true;
-    }).addMatcher(isFulfilled, (state) => {
-        state.fetching = false;
-    }).addMatcher(isRejected, (state) => {
-        state.fetching = false;
-    })
+        .addCase(increment, (state) => {
+            state.counter++;
+        }).addCase(fetchPosts.fulfilled, (state, action) => {
+            state.paginated = action.payload;
+        }).addMatcher(isPending, (state) => {
+            state.fetching = true;
+        }).addMatcher(isFulfilled, (state) => {
+            state.fetching = false;
+        }).addMatcher(isRejected, (state) => {
+            state.fetching = false;
+        })
 });
 

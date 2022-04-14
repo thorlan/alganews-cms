@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
-import { User, UserService } from "orlandini-sdk";
+import { User, UserService } from "danielbonifacio-sdk";
 
 const fetchEditors = createAsyncThunk(
     'user/fetchEditors',
@@ -9,7 +9,7 @@ const fetchEditors = createAsyncThunk(
     }
 )
 
-interface UserSliceState{
+interface UserSliceState {
     editors: User.EditorSummary[],
     fetching: boolean
 }
@@ -23,7 +23,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {},
-    extraReducers(builder){
+    extraReducers(builder) {
 
         const pendingActions = isPending(fetchEditors);
         const fullFilledActions = isFulfilled(fetchEditors);
