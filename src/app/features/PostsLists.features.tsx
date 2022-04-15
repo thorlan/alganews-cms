@@ -14,6 +14,8 @@ import { Post } from "danielbonifacio-sdk";
 import usePosts from "../../core/hooks/usePosts";
 import AuthService from "../../auth/Authorization.service";
 
+const BLOG_SERVER = process.env.REACT_APP_BLOG_URL;
+
 function PostList() {
 
     const { loading, paginatedPosts, fetchPosts } = usePosts();
@@ -29,7 +31,7 @@ function PostList() {
     }, [fetchPosts, page])
 
     const openInNew = useCallback(async (post: Post.Summary) => {
-        let url = `http://localhost:3002/posts/${post.id}/${post.slug}`;
+        let url = `${BLOG_SERVER}/posts/${post.id}/${post.slug}`;
 
         if (!post.published) {
             const codeVerifier = AuthService.getCodeVerifier();
