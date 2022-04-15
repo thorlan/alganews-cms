@@ -10,7 +10,7 @@ export default function useEarnings() {
     const fetchDetailedUser = useCallback(async function () {
         UserService.getDetailedUser(Number(user?.id))
             .then(setDetailedUser);
-    }, []);
+    }, [user?.id]);
 
     return {
         detailedUser,

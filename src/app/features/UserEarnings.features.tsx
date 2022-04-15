@@ -1,4 +1,3 @@
-import { User } from "danielbonifacio-sdk";
 import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
