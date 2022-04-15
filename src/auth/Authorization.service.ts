@@ -27,16 +27,18 @@ export default class AuthService {
     public static imperativelySendToLogout() {
         window.localStorage.clear();
         window.location.href =
-            "http://localhost:8081/logout?redirect=http://localhost:3000";
+            "http://localhost:8081/logout?redirect=http://localhost:3001";
     }
 
     public static async getNewToken(config: {
         refreshToken: string;
         codeVerifier: string;
+        scope?: string;
     }) {
         const formUrlEncoded = qs.stringify({
             refresh_token: config.refreshToken,
             code_verifier: config.codeVerifier,
+            scope: config.scope,
             grant_type: "refresh_token",
             client_id: "alganews-cms",
         });

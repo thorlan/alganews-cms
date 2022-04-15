@@ -1,5 +1,13 @@
-import Button from '../Button/Button';
-import * as SC from './SessionController.styles';
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
+import ptBR from "date-fns/esm/locale/pt-BR";
+import { useCallback } from "react";
+import Skeleton from "react-loading-skeleton";
+import AuthService from "../../../auth/Authorization.service";
+import useAuth from "../../../core/hooks/useAuth";
+import confirm from "../../../core/utils/confirm";
+import Button from "../Button/Button";
+import * as SC from "./SessionController.styles";
 
 export interface SessionControllerProps {
     name: string;
@@ -8,13 +16,32 @@ export interface SessionControllerProps {
 }
 
 function SessionController(props: SessionControllerProps) {
+    const { user } = useAuth();
 
-    return <SC.Wrapper>
-        <SC.Avatar src={'https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'} alt={'img profile'}></SC.Avatar>
-            <SC.Name>{props.name}</SC.Name>
-            <SC.Description>{props.description}</SC.Description>
-            <Button onClick={props.onLogout} variant={'danger'} label={'Logout'} />
-    </SC.Wrapper>
+    const logout = useCallback(() => {
+        confirm({
+            title: "Deseja sair?",
+            onConfirm: AuthService.imperativelySendToLogout,
+        });
+    }, []);
+
+    if (!user) return <Skeleton height={215} />;
+
+    return (
+        <SC.Wrapper>
+            <SC.Avatar src={user.avatarUrls.small} />
+            <SC.Name>{user.name}</SC.Name>
+            <SC.Description>
+                Editor desde{" "}
+                <strong>
+                    {format(parseISO(user.createdAt), "MMMM 'de' yyyy", {
+                        locale: ptBR,
+                    })}
+                </strong>
+            </SC.Description>
+            <Button variant="danger" label="Logout" onClick={logout} />
+        </SC.Wrapper>
+    );
 }
 
-export default SessionController
+export default SessionController;

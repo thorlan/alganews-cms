@@ -7,13 +7,13 @@ import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 
 export default function UserEarnings() {
 
-    const { user, fetchDetailedUser } = useEarnings();
+    const { detailedUser, fetchDetailedUser } = useEarnings();
 
     useEffect(() => {
         fetchDetailedUser();
     }, [fetchDetailedUser])
 
-    if (!user) {
+    if (!detailedUser) {
         return <UserEarningsWrapper style={{ height: 123 }}>
             <Skeleton height={37} width={144} />
             <Skeleton height={37} width={144} />
@@ -23,10 +23,10 @@ export default function UserEarnings() {
     }
 
     return <UserEarningsWrapper>
-        <ValueDescriptor color="primary" description="ganhos no mês" value={user.metrics.monthlyEarnings} isCurrency />
-        <ValueDescriptor color="primary" description="ganhos na semana" value={user.metrics.weeklyEarnings} isCurrency />
-        <ValueDescriptor color="default" description="ganhos de sempre" value={user.metrics.lifetimeEarnings} isCurrency />
-        <ValueDescriptor color="default" description="total de palavras" value={user.metrics.lifetimeWords} />
+        <ValueDescriptor color="primary" description="ganhos no mês" value={detailedUser.metrics.monthlyEarnings} isCurrency />
+        <ValueDescriptor color="primary" description="ganhos na semana" value={detailedUser.metrics.weeklyEarnings} isCurrency />
+        <ValueDescriptor color="default" description="ganhos de sempre" value={detailedUser.metrics.lifetimeEarnings} isCurrency />
+        <ValueDescriptor color="default" description="total de palavras" value={detailedUser.metrics.lifetimeWords} />
     </UserEarningsWrapper>
 }
 

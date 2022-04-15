@@ -1,7 +1,7 @@
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 import { format } from "date-fns";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Column, usePagination, useTable } from "react-table";
 import withBoundary from "../../core/hoc/withBoundary";
@@ -12,6 +12,7 @@ import Table from "../components/Table/Table";
 import PostTitleAnchor from "../components/PostTitleAnchor";
 import { Post } from "danielbonifacio-sdk";
 import usePosts from "../../core/hooks/usePosts";
+import AuthService from "../../auth/Authorization.service";
 
 function PostList() {
 
@@ -27,12 +28,46 @@ function PostList() {
         });
     }, [fetchPosts, page])
 
+    const openInNew = useCallback(async (post: Post.Summary) => {
+        let url = `http://localhost:3002/posts/${post.id}/${post.slug}`;
+
+        if (!post.published) {
+            const codeVerifier = AuthService.getCodeVerifier();
+            const refreshToken = AuthService.getRefreshToken();
+
+            if (codeVerifier && refreshToken) {
+                const { access_token } = await AuthService.getNewToken({
+                    codeVerifier,
+                    refreshToken,
+                    scope: "post:read",
+                });
+
+                url += `?token=${access_token}`;
+            }
+        }
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.click();
+    }, []);
+
     const columns = useMemo<Column<Post.Summary>[]>(
         () => [
             {
                 Header: '',
                 accessor: 'id', // accessor is the "key" in the data
-                Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09f'} />
+                Cell: ({ row }) => (
+                    <div style={{ paddingLeft: 8, width: "16px" }}>
+                        <span
+                            style={{ cursor: "pointer" }}
+                            onClick={() => openInNew(row.original)}
+                        >
+                            <Icon path={mdiOpenInNew} size={"16px"} color={"#09f"} />
+                        </span>
+                    </div>
+                ),
             },
             {
                 Header: () => <div style={{ textAlign: 'left' }}>Título</div>,
