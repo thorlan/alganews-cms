@@ -1,5 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { getEditorDescription, User } from "danielbonifacio-sdk";
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 import { transparentize } from "polished";
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router";
@@ -93,7 +95,9 @@ function EditorProfile(props: EditorProfileProps) {
           {(editorData as User.Detailed)?.birthdate && (
             <FieldDescriptor
               field={"Nascimento"}
-              value={(editorData as User.Detailed)?.birthdate}
+              value={format(
+                parseISO((editorData as User.Detailed)?.birthdate), "dd/MM/yyyy"
+              )}
             />
           )}
         </ContactInfo>
