@@ -11,6 +11,10 @@ export interface CircleChartProps {
 
 function CircleChart(props: CircleChartProps) {
 
+    if (props.progress > 100) {
+        throw new Error('Progresso só pode ser menor ou igual a 100')
+    }
+
     const getThemeColor = () => props.theme === 'primary' ? '#09f' : '#274060';
 
     const THEME = getThemeColor();
@@ -31,7 +35,9 @@ function CircleChart(props: CircleChartProps) {
 
 
     return <CC.Wrapper>
-        <CC.SvgWrapper style={{ width: props.size, height: props.size }}>
+        <CC.SvgWrapper
+            data-testid={'svg-wrapper'}
+            style={{ width: props.size, height: props.size }}>
             <CC.Svg width={props.size} height={props.size}>
                 <CC.CircleBG cy={CENTER} cx={CENTER} r={RADIUS} />
                 <CC.Circle
@@ -40,15 +46,15 @@ function CircleChart(props: CircleChartProps) {
                     cx={CENTER}
                     r={RADIUS}
                     stroke={STROKE_COLOR}
-                    strokeWidth={STROKE_WIDTH} 
+                    strokeWidth={STROKE_WIDTH}
                     strokeDasharray={CIRCUNFERENCE}
                     strokeDashoffset={offset}
-                    />
+                />
             </CC.Svg>
-            <CC.Percentage style={{color: THEME}}>{ Math.ceil(props.progress) }%</CC.Percentage>
+            <CC.Percentage style={{ color: THEME }}>{Math.ceil(props.progress)}%</CC.Percentage>
         </CC.SvgWrapper>
         {
-            props.caption && <CC.Caption> { props.caption } </CC.Caption>
+            props.caption && <CC.Caption> {props.caption} </CC.Caption>
         }
     </CC.Wrapper>
 }

@@ -1,18 +1,13 @@
-import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
-import useEarnings from "../../core/hooks/useEarnings";
+import useAuth from "../../core/hooks/useAuth";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 
 export default function UserEarnings() {
 
-    const { detailedUser, fetchDetailedUser } = useEarnings();
+    const { user } = useAuth();
 
-    useEffect(() => {
-        fetchDetailedUser();
-    }, [fetchDetailedUser])
-
-    if (!detailedUser) {
+    if (!user) {
         return <UserEarningsWrapper style={{ height: 123 }}>
             <Skeleton height={37} width={144} />
             <Skeleton height={37} width={144} />
@@ -22,10 +17,10 @@ export default function UserEarnings() {
     }
 
     return <UserEarningsWrapper>
-        <ValueDescriptor color="primary" description="ganhos no mês" value={detailedUser.metrics.monthlyEarnings} isCurrency />
-        <ValueDescriptor color="primary" description="ganhos na semana" value={detailedUser.metrics.weeklyEarnings} isCurrency />
-        <ValueDescriptor color="default" description="ganhos de sempre" value={detailedUser.metrics.lifetimeEarnings} isCurrency />
-        <ValueDescriptor color="default" description="total de palavras" value={detailedUser.metrics.lifetimeWords} />
+        <ValueDescriptor color="primary" description="ganhos no mês" value={user.metrics.monthlyEarnings} isCurrency />
+        <ValueDescriptor color="primary" description="ganhos na semana" data-testid={"weeklyEarnings"} value={user.metrics.weeklyEarnings} isCurrency />
+        <ValueDescriptor color="default" description="ganhos de sempre" value={user.metrics.lifetimeEarnings} isCurrency />
+        <ValueDescriptor color="default" description="total de palavras" value={user.metrics.lifetimeWords} />
     </UserEarningsWrapper>
 }
 
